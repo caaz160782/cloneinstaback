@@ -1,0 +1,11 @@
+{
+  "name": "instaclone",
+  "version": "0.0.1",
+  "description": "server de instaclone",
+  "main": "index.js",
+  "author": "carlos aguirre",
+  "license": "MIT",
+  "scripts": {
+    "dev":"node ./index.js"
+  }
+}
