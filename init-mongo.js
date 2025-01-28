@@ -1,12 +1,10 @@
 // init-mongo.js
-db = db.getSiblingDB('UPTASK'); // Cambia a la base de datos UPTASK
-db.createCollection('exampleCollection'); // Crea una colección de ejemplo
-
+db = db.getSiblingDB('InstaClone'); // Cambia a la base de datos UPTASK
 // Crea un usuario con permisos de lectura y escritura
 db.createUser({
-  user: 'uptask_admin',
-  pwd: '9UptasKadmiN0', // Cambia esto a una contraseña segura
+  user: 'instaClone_admin',
+  pwd: '1nstaCl0ne', // Cambia esto a una contraseña segura
   roles: [
-    { role: 'readWrite', db: 'UPTASK' }
+    { role: 'readWrite', db: 'InstaClone' }
   ]
 });
