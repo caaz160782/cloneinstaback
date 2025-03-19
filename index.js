@@ -1,8 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
-const  typeDefs = require("./gql/schema");
-const  resolvers = require("./gql/resolvers");
+const { typeDefs, resolvers } =require('./gql/index');
 const  conectarDBMongo = require("./db/db");
 require('dotenv').config();
 
@@ -11,23 +10,23 @@ require('dotenv').config();
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    // context: ({req}) => {
-    //     // console.log(req.headers['authorization'])
-    //     // console.log(req.headers);
-    //     const token = req.headers['authorization'] || '';
-    //     if(token) {
-    //         try {
-    //             const usuario = jwt.verify(token.replace('Bearer ', ''), process.env.SECRETA );
-    //             // console.log(usuario);
-    //             return {
-    //                 usuario
-    //             }
-    //         } catch (error) {
-    //             console.log('Hubo un error');
-    //             console.log(error);
-    //         }
-    //     }
-    // }
+    context: ({req}) => {
+        // console.log(req.headers['authorization'])
+        // console.log(req.headers);
+        const token = req.headers['authorization'] || '';
+        if(token) {
+            try {
+                const usuario = jwt.verify(token.replace('Bearer ', ''), process.env.SECRETA );
+                // console.log(usuario);
+                return {
+                    usuario
+                }
+            } catch (error) {
+                console.log('Hubo un error');
+                console.log(error);
+            }
+        }
+    }
 });
 
 // Crear una instancia de Express
