@@ -13,6 +13,10 @@ const userTypeDefs  = gql`
         createAt: String
        }
 
+       type Token {        
+        token: String
+       }
+
        input UserInput
        {
         name: String!
@@ -20,13 +24,22 @@ const userTypeDefs  = gql`
         email: String!        
         password: String!        
        }
+
+       input LoginInput
+       {
+        email: String!        
+        password: String!        
+       }
+    
     
       type Query {
+      
        getUser: [User]
       }
 
       type Mutation {
-         registerUser(input:UserInput): User
+         LoginUser(input:LoginInput): Token
+         registerUser(input:UserInput): User         
       }
 
 

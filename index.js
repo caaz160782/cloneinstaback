@@ -1,6 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
+const {verify} = require("./utils/jwt")
 const { typeDefs, resolvers } =require('./gql/index');
 const  conectarDBMongo = require("./db/db");
 require('dotenv').config();
@@ -16,7 +17,7 @@ const server = new ApolloServer({
         const token = req.headers['authorization'] || '';
         if(token) {
             try {
-                const usuario = jwt.verify(token.replace('Bearer ', ''), process.env.SECRETA );
+                const usuario = verify(token);
                 // console.log(usuario);
                 return {
                     usuario
