@@ -6,19 +6,16 @@ const { typeDefs, resolvers } =require('./gql/index');
 const  conectarDBMongo = require("./db/db");
 require('dotenv').config();
 
-
 //servidor
 const server = new ApolloServer({
     typeDefs,
     resolvers,
     context: ({req}) => {
-        // console.log(req.headers['authorization'])
-        // console.log(req.headers);
         const token = req.headers['authorization'] || '';
         if(token) {
             try {
                 const usuario = verify(token);
-                // console.log(usuario);
+                console.log(usuario);
                 return {
                     usuario
                 }

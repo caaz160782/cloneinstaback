@@ -3,11 +3,12 @@ require('dotenv').config();
 
 const secret =process.env.JWT_SECRET;
 
-const generateJWT = (payload) => {
+const generateJWT = (payload,expires) => {
     const jwtGenerate = jwt.sign(payload, secret, {
-        expiresIn: '180d'
+        expiresIn: expires
     });    
-    return jwtGenerate;
+    const Token = { token:jwtGenerate};
+    return Token
 };
 
 const verify = (token) => {

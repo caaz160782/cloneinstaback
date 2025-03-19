@@ -9,17 +9,18 @@ const LoginUserController = async (input) => {
         const userFound = await User.findOne({ email:email.toLowerCase() });
         if(!userFound) throw new Error("El email no se encuentra registrado");
         
-        const match = await checkPassword(pswF, found.password);
+        const match = await checkPassword(pswF, userFound.password);
 
         if (match) {
             const payload = {
-              sub: found._id.toString(),
-              userName: found.userName              
+              id: userFound._id.toString(),
+              name:userFound.name,
+              email:userFound.email,
+              userName: userFound.userName              
             };
-            const tokenJWT = generateJWT(payload);
-            const Token = { token:tokenJWT}
-
-            return Token;
+            const expires='180d'
+            const tokenJWT = generateJWT(payload,expires);
+            return tokenJWT;
         }else{
             new Error("no fue posible generar el token");
         }        
